@@ -1,2 +1,2 @@
 # SandGame
-## Only requirement is pygame
+Only requirement is pygames
