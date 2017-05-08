@@ -1,7 +1,8 @@
 from sand import game
+import config
 
 def main():
-    thisgame = game.Game()
+    thisgame = game.Game(config.GAMECONFIG)
     try:
         thisgame.init()
         while thisgame.is_running():

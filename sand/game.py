@@ -5,10 +5,10 @@ from sand.stype import sandbit, water, fire, stone
 
 
 class Game(object):
-    def __init__(self):
+    def __init__(self, config):
         os.environ['SDL_VIDEO_CENTERED'] = '1'
         pygame.init()
-        self.state, self.screen = GameState(), None
+        self.state, self.screen = GameState(config), None
         self.size = self.width, self.height = 640, 480
         self.clock = pygame.time.Clock()
     def quit(self):
@@ -35,25 +35,17 @@ class Game(object):
         pygame.display.set_caption(title)
 
 class GameState(object):
-    def __init__(self):
+    def __init__(self, config):
         self.meta = dict()
         self.meta["running"] = True
         self.meta['pause'] = False
-        self.meta['bounds'] = False
         self.meta['pix'] = dict()
-        self.meta['pen'] = 1
-        self.meta['current'] = "sand"
-        self.meta['types'] = {
-            'sand'  : sandbit.Sand(),
-            'stone' : stone.Stone(),
-            'water' : water.Water(),
-            'fire'  : fire.Fire(),
-        }
-        self.meta['source_flow'] = True
-        self.meta['sources'] = {
-            (50, 0)  : "sand",
-            (200, 0) : "water"
-        }
+        self.meta['pen'] = config['initial_pen']
+        self.meta['bounds'] = config['bounds']
+        self.meta['current'] = config['starting_element']
+        self.meta['types'] = config['elements']
+        self.meta['source_flow'] = config['sources_enabled']
+        self.meta['sources'] = config['element_sources']
     def is_running(self):
         return self.meta["running"]
     def set_running(self, run):

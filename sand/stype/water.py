@@ -11,14 +11,8 @@ class Water(bit.Bit):
         return Water()
     def tick(self, coords, allpix):
         if allpix.get((coords[0], coords[1]+1)) is None:
-            newpos = (coords[0], coords[1]+1)
-            return newpos
-        newpos = (coords[0] + randint(-1, 1), coords[1])
-        if allpix.get(newpos) is None:
-            return newpos
-        elif allpix.get((newpos[0], newpos[1]+1)) is None:
-            return (newpos[0], newpos[1]+1)
-        return coords
+            return (coords[0], coords[1]+1)
+        return (coords[0] + randint(-1, 1), coords[1])
 
     def interact(self, oldcoord, newcoord, pix, allpix):
         return False
