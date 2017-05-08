@@ -1,5 +1,6 @@
 # SandGame
-Only requirement is pygame
+Only requirement is to install pygame for python 3.6
+* `pip install pygame`
 
 ## Controls:
 * Left Click to place element
