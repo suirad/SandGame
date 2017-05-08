@@ -20,6 +20,6 @@ class Water(bit.Bit):
             return (newpos[0], newpos[1]+1)
         return coords
 
-    def interact(self, coord, pix, allpix):
+    def interact(self, oldcoord, newcoord, pix, allpix):
         return False
 

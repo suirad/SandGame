@@ -18,7 +18,7 @@ class Bit(object):
             removed
         """
         return coords
-    def interact(self, coord, pix, allpix):
+    def interact(self, oldcoord, newcoord, pix, allpix):
         """
         This is called if tick returns a location other than its given coord.
         Coord will be the new coord and pix will be the pixel in the way.

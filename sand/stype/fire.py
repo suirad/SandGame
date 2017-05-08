@@ -32,7 +32,7 @@ class Fire(bit.Bit):
         else:
             self.move = True
             return (coords[0], coords[1]-1)
-    def interact(self, coord, pix, allpix):
+    def interact(self, oldcoord, newcoord, pix, allpix):
         if isinstance(pix, water.Water):
             self.life = 0
             return False

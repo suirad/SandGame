@@ -1,5 +1,5 @@
 from random import randint
-from sand.stype import bit
+from sand.stype import bit, water
 
 SANDCOLOR = (238, 232, 170)
 
@@ -17,10 +17,17 @@ class Sand(bit.Bit):
         else:
             self.move = True
             newcoords = (coords[0], coords[1] + 1)
-        if allpix.get(newcoords) is None:
+        if allpix.get(newcoords) is None or water.Water:
             return newcoords
+        elif allpix.get((newcoords[0]-1, newcoords[1])) is None:
+            return (newcoords[0]-1, newcoords[1])
+        elif allpix.get((newcoords[0]+1, newcoords[1])) is None:
+            return (newcoords[0]+1, newcoords[1])
         else:
             return coords
-    def interact(self, coord, pix, allpix):
+    def interact(self, oldcoord, newcoord, pix, allpix):
+        if isinstance(pix, water.Water):
+            allpix[oldcoord] = pix
+            allpix[newcoord] = self
         return False
 

@@ -27,7 +27,7 @@ def tick_pix(game, allpix):
             allpix[newcoords] = pix
             del allpix[coords]
             continue
-        if pix.interact(newcoords, neighbor, allpix) is True:
+        if pix.interact(coords, newcoords, neighbor, allpix) is True:
             allpix[newcoords] = pix
             del allpix[coords]
 
