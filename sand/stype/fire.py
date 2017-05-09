@@ -1,9 +1,11 @@
 from random import randint
-from sand.stype import bit, water
+from sand.stype import bit, water, wood
 
 FIREMAINCOLOR = (255, 0, 0)
 FIREHIGHCOLOR = (255, 140, 0)
 FIRELOWCOLOR = (255, 215, 0)
+
+DIE = (-1, -1)
 
 class Fire(bit.Bit):
     "Best fire"
@@ -21,7 +23,7 @@ class Fire(bit.Bit):
     def tick(self, coords, allpix):
         self.life -= 1
         if self.life < 0:
-            return (-1, -1)
+            return DIE
         elif self.color is FIREMAINCOLOR and self.life < 50:
             self.color = FIREHIGHCOLOR
         elif self.color is FIREHIGHCOLOR and self.life < 25:
@@ -36,6 +38,33 @@ class Fire(bit.Bit):
         if isinstance(pix, water.Water):
             self.life = 0
             return False
+        elif isinstance(pix, wood.Wood):
+            self.life = 0
+            allpix[newcoord] = Ember()
+            return False
         else:
             self.life = 0
             return True
+
+class Ember(bit.Bit):
+    "Burning Ember creates fire"
+    def __init__(self):
+        self.color = FIREHIGHCOLOR
+        self.burn = 0
+    def clone(self):
+        return Ember()
+    def tick(self, coords, allpix):
+        self.burn += 1
+        if self.burn < 75:
+            return coords
+        self.burn = 0
+        up, upleft, upright = (coords[0], coords[1]-1), \
+            (coords[0]-1, coords[1]-1), (coords[0]+1, coords[1]-1)
+        if allpix.get(up) is None:
+            allpix[up] = Fire()
+        for point in [up, upleft, upright]:
+            if isinstance(allpix.get(point), wood.Wood):
+                allpix[point] = Ember()
+        return DIE
+
+

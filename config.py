@@ -1,5 +1,5 @@
 from sand.stype import sandbit, stone, water
-from sand.stype import fire, wood
+from sand.stype import fire, wood, null
 
 GAMECONFIG = {
     'bounds': False,
@@ -14,6 +14,7 @@ GAMECONFIG['elements'] = {
     'water' : water.Water(),
     'fire'  : fire.Fire(),
     'wood'  : wood.Wood(),
+    'null'  : null.Null(),
 }
 
 GAMECONFIG['element_sources'] = {

@@ -13,7 +13,7 @@ class Sand(bit.Bit):
     def tick(self, coords, allpix):
         if self.move is True:
             self.move = False
-            newcoords = (coords[0] + randint(-1, 1), coords[1] + 1)
+            newcoords = (coords[0]+ randint(-1, 1), coords[1] + 1)
         else:
             self.move = True
             newcoords = (coords[0], coords[1] + 1)
