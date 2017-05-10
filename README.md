@@ -10,3 +10,4 @@ Only requirement is to install pygame for python 3.6
 * B to toggle screen borders
 * C to clear screen
 * S to toggle element Sources
+* P to pause game
